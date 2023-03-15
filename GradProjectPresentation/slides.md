@@ -19,6 +19,67 @@ The last comment block of each slide will be treated as slide notes. It will be 
 -->
 
 ---
+layout: statement
+---
+
+# Why take a hybrid approach?
+
+---
+
+# Why take a hybrid approach?
+
+<div>
+  <ul>
+    <li>Limited quantum resources</li>
+    <li>Suboptimal results in classical</li>
+    <li>Long runtimes in classical</li>
+    <li>Using the best of both worlds</li>
+  </ul>
+</div>
+
+<style>
+  li {
+    font-size: 23px;
+  }
+</style>
+
+---
+layout: section
+---
+
+# Modeling the problem
+
+---
+
+# Things to consider
+
+<div>
+  <ul>
+    <li v-click="1">The expected return</li>
+    <li v-click="2">Cost of the portfolio</li>
+    <li v-click="3">The interactions between stocks</li>
+    <li v-click="4">The risk</li>
+  </ul>
+</div>
+
+<style>
+  li {
+    font-size: 23px;
+  }
+</style>
+
+---
+
+# The expected return
+## Our objective function
+
+$$Obj = \sum_{i=1}^{n}{r_ip_ix_i}$$
+
+<style>
+  .katex { font-size: 40px; }
+</style>
+
+---
 
 # What is Slidev?
 
