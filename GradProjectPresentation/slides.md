@@ -24,22 +24,44 @@ layout: statement
 
 # Why take a hybrid approach?
 
+
+<div class="page-num">
+  <SlideCurrentNo /> / <SlidesTotal />
+</div>
+
+<style>
+  .page-num {
+    position: absolute;
+    bottom: 12px;
+    left: 47.7%;
+  }
+</style>
+
 ---
 
 # Why take a hybrid approach?
 
 <div>
   <ul>
-    <li>Limited quantum resources</li>
-    <li>Suboptimal results in classical</li>
-    <li>Long runtimes in classical</li>
-    <li>Using the best of both worlds</li>
+    <li v-click="1">Limited quantum resources</li>
+    <li v-click="2">Suboptimal results in classical</li>
+    <li v-click="3">Long runtimes in classical</li>
+    <li v-click="4">Using the best of both worlds</li>
   </ul>
+</div>
+
+<div class="page-num">
+  <SlideCurrentNo /> / <SlidesTotal />
 </div>
 
 <style>
   li {
     font-size: 23px;
+  }
+  .page-num {
+    position: absolute;
+    bottom: 12px;
+    left: 47.7%;
   }
 </style>
 
@@ -48,6 +70,18 @@ layout: section
 ---
 
 # Modeling the problem
+
+<div class="page-num">
+  <SlideCurrentNo /> / <SlidesTotal />
+</div>
+
+<style>
+  .page-num {
+    position: absolute;
+    bottom: 12px;
+    left: 47.7%;
+  }
+</style>
 
 ---
 
@@ -58,25 +92,171 @@ layout: section
     <li v-click="1">The expected return</li>
     <li v-click="2">Cost of the portfolio</li>
     <li v-click="3">The interactions between stocks</li>
-    <li v-click="4">The risk</li>
   </ul>
+</div>
+
+<div class="page-num">
+  <SlideCurrentNo /> / <SlidesTotal />
 </div>
 
 <style>
   li {
     font-size: 23px;
   }
+  .page-num {
+    position: absolute;
+    bottom: 12px;
+    left: 47.7%;
+  }
 </style>
 
 ---
 
 # The expected return
-## Our objective function
+## Our linear terms and objective function
 
 $$Obj = \sum_{i=1}^{n}{r_ip_ix_i}$$
 
+$r_i$ is the expected monthly return
+
+$p_i$ is the price per share
+
+$x_i$ how many shares to buy
+
+<div class="page-num">
+  <SlideCurrentNo /> / <SlidesTotal />
+</div>
+
 <style>
   .katex { font-size: 40px; }
+  .page-num {
+    position: absolute;
+    bottom: 12px;
+    left: 47.7%;
+  }
+</style>
+
+---
+
+# The cost of the portfolio
+## First constraint
+
+$$C \le B$$
+
+<div class="legend">
+
+  $C$ is the total cost
+
+  $B$ is the maximum budget
+
+</div>
+
+<div class="page-num">
+  <SlideCurrentNo /> / <SlidesTotal />
+</div>
+
+<style>
+  .katex { font-size: 40px; }
+  .legend .katex {
+    font-size: 28px;
+  }
+  .page-num {
+    position: absolute;
+    bottom: 12px;
+    left: 47.7%;
+  }
+</style>
+
+---
+
+# The cost of the portfolio
+## First constraint
+
+$$C \le B$$
+
+$$\sum_{i=1}^n{p_ix_i} \le B$$
+
+$p_i$ is the price per share
+
+$x_i$ how many shares to buy
+
+<div class="page-num">
+  <SlideCurrentNo /> / <SlidesTotal />
+</div>
+
+<style>
+  .katex { font-size: 40px; }
+  .page-num {
+    position: absolute;
+    bottom: 12px;
+    left: 47.7%;
+  }
+</style>
+
+---
+
+# The interactions between stocks (Risk)
+## Second constraint
+
+$$R \le M$$
+
+<div class="legend">
+
+  $R$ is the risk
+
+  $M$ is the maximum risk
+
+</div>
+
+<div class="page-num">
+  <SlideCurrentNo /> / <SlidesTotal />
+</div>
+
+<style>
+  .katex { font-size: 40px; }
+  .legend .katex {
+    font-size: 28px;
+  }
+  .page-num {
+    position: absolute;
+    bottom: 12px;
+    left: 47.7%;
+  }
+</style>
+
+---
+
+# The interactions between stocks (Risk)
+## Second constraint
+
+$$R \le M$$
+
+$$\sum_{i=1}^{n}\sum_{j=1}^{n}{\sigma_{ij}p_ix_ip_jx_j} \le M$$
+
+<div class="legend">
+
+  $\sigma_{ij}$ is the covariance between stocks
+
+  $p_i$ is the price per share
+
+  $x_i$ how many shares to buy
+
+</div>
+
+<div class="page-num">
+  <SlideCurrentNo /> / <SlidesTotal />
+</div>
+
+<style>
+  .katex { font-size: 40px; }
+  .legend .katex {
+    font-size: 28px;
+  }
+  .page-num {
+    position: absolute;
+    bottom: 12px;
+    left: 47.7%;
+  }
 </style>
 
 ---
