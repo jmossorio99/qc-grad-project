@@ -19,11 +19,24 @@ The last comment block of each slide will be treated as slide notes. It will be 
 -->
 
 ---
-layout: statement
+layout: image-right
+image: '/stocks.png'
 ---
 
-# Why take a hybrid approach?
+# Understanding the problem
+## What's portfolio optimization?
 
+Finding the best distribution of assets to maximize or minimize a desired metric
+
+<br>
+
+<div v-click="1">
+  Examples:
+  <ul>
+    <li>Maximizing the return while limiting the risk</li>
+    <li>Minimizing the risk while maintaining a minimum return</li>
+  </ul>
+</div>
 
 <div class="page-num">
   <SlideCurrentNo /> / <SlidesTotal />
@@ -33,9 +46,70 @@ layout: statement
   .page-num {
     position: absolute;
     bottom: 12px;
-    left: 47.7%;
+    left: 443px;
   }
 </style>
+
+---
+layout: image-right
+image: '/hpc.jpg'
+---
+
+<div class="container">
+  <div>
+    <h1>Classical Approaches</h1>
+    <ul>
+      <li v-click="">Linear Programming</li>
+      <li v-click="">Quadratic Programming</li>
+      <li v-click="">Genetic Algorithms</li>
+    </ul>
+    <h2 v-click>In general, heuristic methods</h2>
+  </div>
+</div>
+
+<div class="page-num">
+  <SlideCurrentNo /> / <SlidesTotal />
+</div>
+
+<style>
+  li {
+    font-size: 23px;
+  }
+  .container {
+    display: flex;
+  }
+  img {
+    position: absolute;
+    left: 550px;
+    top: 200px;
+  }
+  .page-num {
+    position: absolute;
+    bottom: 12px;
+    left: 443px;
+  }
+</style>
+
+---
+layout: statement
+---
+
+# Why take a hybrid approach?
+
+
+<!-- <div class="page-num">
+  <SlideCurrentNo /> / <SlidesTotal />
+</div>
+
+<style>
+  .page-num {
+    position: absolute;
+    bottom: 12px;
+    left: 47.7%;
+  }
+</style> -->
+
+<!-- Notes: -->
 
 ---
 
@@ -44,8 +118,8 @@ layout: statement
 <div>
   <ul>
     <li v-click="1">Limited quantum resources</li>
-    <li v-click="2">Suboptimal results in classical</li>
-    <li v-click="3">Long runtimes in classical</li>
+    <li v-click="2">Suboptimal results in classical methods</li>
+    <li v-click="3">Long runtimes in classical methods</li>
     <li v-click="4">Using the best of both worlds</li>
   </ul>
 </div>
@@ -66,11 +140,43 @@ layout: statement
 </style>
 
 ---
-layout: section
+
+# Current Quantum Solutions
+
+<div>
+  <ul>
+    <li v-click="1">VQE</li>
+    <li v-click="2">QAOA</li>
+    <li v-click="3">Quantum Annealing <span v-click="4">👈</span></li>
+  </ul>
+</div>
+<img v-click src="d-wave-advantage.jpg" class="d-wave-img"/>
+<div class="page-num">
+  <SlideCurrentNo /> / <SlidesTotal />
+</div>
+
+<style>
+  li {
+    font-size: 23px;
+  }
+  .page-num {
+    position: absolute;
+    bottom: 12px;
+    left: 47.7%;
+  }
+  .d-wave-img {
+    height: 320px;
+    width: 300px;
+    position: absolute;
+    left: 500px;
+    bottom: 120px;
+  }
+</style>
+
 ---
 
-# Modeling the problem
-
+<img src="hybrid-solvers.png" />
+<p>Source: D-Wave</p>
 <div class="page-num">
   <SlideCurrentNo /> / <SlidesTotal />
 </div>
@@ -81,7 +187,31 @@ layout: section
     bottom: 12px;
     left: 47.7%;
   }
+  p{
+    font-size: 12px;
+  }
 </style>
+
+---
+layout: section
+---
+
+# Modeling the problem
+## A QUBO formulation
+
+<!-- <div class="page-num">
+  <SlideCurrentNo /> / <SlidesTotal />
+</div>
+
+<style>
+  .page-num {
+    position: absolute;
+    bottom: 12px;
+    left: 47.7%;
+  }
+</style> -->
+
+<!-- Notes: -->
 
 ---
 
@@ -258,6 +388,13 @@ $$\sum_{i=1}^{n}\sum_{j=1}^{n}{\sigma_{ij}p_ix_ip_jx_j} \le M$$
     left: 47.7%;
   }
 </style>
+
+---
+layout: section
+---
+
+# Implementing the solution
+## Using QPLEX
 
 ---
 
