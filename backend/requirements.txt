@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+pydantic
+dimod
+docplex
+dwave-system
+dwave-hybrid
+qiskit
