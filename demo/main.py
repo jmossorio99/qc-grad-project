@@ -31,6 +31,7 @@ def build_demo_df():
 
 
 def set_columns(data, df, cols):
+    cols = cols[:101]
     refactored_df = pd.concat([df, pd.DataFrame(columns=cols)])
     for col in cols:
         col_to_add = data[data['Name'] == col]['open'].tolist()
@@ -56,9 +57,9 @@ def get_data(b):
 
 
 # Define budget
-budget = 1000
+budget = 5000
 # Define max_risk
-max_risk = 1373.85
+max_risk = 2500
 
 max_num_shares, price, avg_monthly_returns, covariance_matrix, stocks = get_data(budget)
 
@@ -88,10 +89,9 @@ print("Computing return...", end="")
 returns = 0
 for index, stock in enumerate(stocks):
     returns = returns + avg_monthly_returns[stock] * x[index] * price[stock]
-print(" done.")
+print(" done")
 # Add constraints and Obj to model
 # print(risk)
-# '''
 print("Adding constraints...", end="")
 portfolio_model.add_constraint(cost <= budget)
 portfolio_model.add_constraint(risk <= max_risk)
@@ -102,7 +102,6 @@ print("Solving...", end="")
 portfolio_model.solve('quantum', backend='d-wave')
 print(" done")
 # print(portfolio_model.objective_value)
-# print(f"Solution:\n{portfolio_model.print_solution()}")
-# '''
-
+print("Solution:")
+portfolio_model.print_solution()
 

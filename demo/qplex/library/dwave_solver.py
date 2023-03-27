@@ -4,6 +4,7 @@ from dwave.system import LeapHybridCQMSampler
 from dimod import ConstrainedQuadraticModel, QuadraticModel
 import os
 
+
 class DWaveSolver:
 
     def solve(self, model) -> dict:
@@ -16,15 +17,13 @@ class DWaveSolver:
         response = self.parse_response(best)
         return response
 
-
-    def parse_response(self, response) ->  dict:
+    def parse_response(self, response) -> dict:
         objective = abs(response.energy)
         solution = response.sample
 
         result = {'objective': float(objective), 'solution': solution}
 
         return result
-
 
     def parse_model(self, model) -> ConstrainedQuadraticModel:
 
@@ -76,7 +75,3 @@ class DWaveSolver:
             cqm.add_constraint(const_qm, sense=sen, rhs=value, label=const.lpt_name)
 
         return cqm
-
-
-
-
