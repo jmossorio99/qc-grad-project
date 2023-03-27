@@ -48,9 +48,6 @@ Finding the best distribution of assets to maximize or minimize a desired metric
 </style>
 
 ---
-layout: image-right
-image: '/hpc.jpg'
----
 
 <div class="container">
   <div>
@@ -152,6 +149,25 @@ image: '/hpc.jpg'
 
 <img src="hybrid-solvers.png" />
 <p>Source: D-Wave</p>
+<!-- <div class="page-num">
+  <SlideCurrentNo /> / <SlidesTotal />
+</div> -->
+
+<style>
+  .page-num {
+    position: absolute;
+    bottom: 12px;
+    left: 47.7%;
+  }
+  p{
+    font-size: 12px;
+  }
+</style>
+
+---
+
+<img src="hybrid-solver-workflow.png" />
+<p>Source: <i>Hybrid Solver for Constrained Quadratic Models - D-Wave White Paper</i></p>
 <!-- <div class="page-num">
   <SlideCurrentNo /> / <SlidesTotal />
 </div> -->
@@ -360,6 +376,93 @@ $$\sum_{i=1}^{n}\sum_{j=1}^{n}{\sigma_{ij}p_ix_ip_jx_j} \le M$$
     position: absolute;
     bottom: 12px;
     left: 47.7%;
+  }
+</style>
+
+---
+layout: section
+---
+
+# Implementing the solution
+## Using QPLEX
+
+---
+
+# Creating the model
+
+<div>
+
+```python 
+from qplex.library.qmodel import QModel
+
+portfolio_model = QModel('portfolio')
+```
+
+</div>
+
+---
+
+# Creating the model
+<div>
+
+```python 
+from qplex.library.qmodel import QModel
+
+portfolio_model = QModel('portfolio')
+
+stocks = ['AAL', 'AAPL', 'AAP', 'ABBV', 'ABC', 'ABT', ...]
+x = portfolio_model.integer_var_list(n, name=lambda index: stocks[index])
+```
+
+</div>
+
+---
+
+<div>
+
+## Computing the cost
+
+```python
+cost = sum(price[s] * x[index] for index, s in enumerate(stocks))
+```
+
+<p>Where <i>price</i> is a dictionary storing the price of each stock</p>
+
+</div>
+
+<div v-click>
+
+## Computing the risk
+
+```python 
+risk = 0
+for i, s1 in enumerate(stocks):
+    for j, s2 in enumerate(stocks):
+        coefficient = covariance_matrix[s1][s2] * price[s1] * price[s2]
+        risk = risk + coefficient * x[i] * x[j]
+```
+
+<p>Where <i>covariance_matrix</i> is a matrix storing the covariance between stocks <i>i,j</i></p>
+
+</div>
+
+<div v-click>
+
+## Computing the returns (the objective function)
+
+```python
+returns = 0
+for index, stock in enumerate(stocks):
+    returns = returns + avg_monthly_returns[stock] * x[index] * price[stock]
+```
+
+<p>Where <i>avg_monthly_returns</i> is a dictionary containing the average monthly return of eacth stock</p>
+
+</div>
+
+<style>
+  p {
+    font-size: 13px;
   }
 </style>
 

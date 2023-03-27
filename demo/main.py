@@ -1,6 +1,5 @@
 import pandas as pd
 from qplex.library.qmodel import QModel
-from itertools import product
 import re
 
 
@@ -74,6 +73,7 @@ x = portfolio_model.integer_var_list(n, name=lambda index: stocks[index], ub=max
 print(" done")
 # constraint: cost <= budget
 print("Computing cost constraint...", end="")
+print(stocks)
 cost = sum(price[s] * x[index] for index, s in enumerate(stocks))
 print(" done")
 # constraint: risk <= max_risk
@@ -97,11 +97,12 @@ portfolio_model.add_constraint(cost <= budget)
 portfolio_model.add_constraint(risk <= max_risk)
 portfolio_model.set_objective('max', returns)
 print(" done")
-
+'''
 print("Solving...", end="")
 portfolio_model.solve('quantum', backend='d-wave')
 print(" done")
 # print(portfolio_model.objective_value)
 print("Solution:")
 portfolio_model.print_solution()
+'''
 
