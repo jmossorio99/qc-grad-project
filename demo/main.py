@@ -56,24 +56,53 @@ def get_data(b):
 
 
 # Define budget
-budget = 100
+budget = 1000
 # Define max_risk
-max_risk = 50
+max_risk = 1373.85
 
 max_num_shares, price, avg_monthly_returns, covariance_matrix, stocks = get_data(budget)
 
 # Define n -> number of variables
 n = len(stocks)
 # Create model
+print("Creating QModel")
 portfolio_model = QModel('portfolio')
 # Define variable list
-x = portfolio_model.integer_var_list(n, name=lambda index: stocks[index])
-# Adding constraint: cost <= budget
+print("Adding variables...", end="")
+x = portfolio_model.integer_var_list(n, name=lambda index: stocks[index], ub=max_num_shares, lb=0)
+print(" done")
+# constraint: cost <= budget
+print("Computing cost constraint...", end="")
 cost = sum(price[s] * x[index] for index, s in enumerate(stocks))
-portfolio_model.add_constraint(cost <= budget)
-# Adding constraint: risk <= max_risk
+print(" done")
+# constraint: risk <= max_risk
+print("Computing risk constraint...", end="")
 risk = 0
-# Make a nested for loop
-for s1, s2 in product(stocks, stocks):
-    coefficient = covariance_matrix[s1][s2] * price[s1] * price[s2]
-    risk = risk + coefficient * x[s1] * x[s2]
+for i, s1 in enumerate(stocks):
+    for j, s2 in enumerate(stocks):
+        coefficient = covariance_matrix[s1][s2] * price[s1] * price[s2]
+        risk = risk + coefficient * x[i] * x[j]
+print(" done")
+# Defining Obj: returns
+print("Computing return...", end="")
+returns = 0
+for index, stock in enumerate(stocks):
+    returns = returns + avg_monthly_returns[stock] * x[index] * price[stock]
+print(" done.")
+# Add constraints and Obj to model
+# print(risk)
+# '''
+print("Adding constraints...", end="")
+portfolio_model.add_constraint(cost <= budget)
+portfolio_model.add_constraint(risk <= max_risk)
+portfolio_model.set_objective('max', returns)
+print(" done")
+
+print("Solving...", end="")
+portfolio_model.solve('quantum', backend='d-wave')
+print(" done")
+# print(portfolio_model.objective_value)
+# print(f"Solution:\n{portfolio_model.print_solution()}")
+# '''
+
+

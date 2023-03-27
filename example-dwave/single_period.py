@@ -214,6 +214,8 @@ class SinglePeriod:
         for s1, s2 in product(self.stocks, self.stocks):
             coeff = (self.covariance_matrix[s1][s2] * self.price[s1] * self.price[s2])
             risk = risk + coeff*x[s1]*x[s2]
+        print(f"COVARIANCE MATRIX \n{self.covariance_matrix}\n")
+        print(f"RISK \n{risk}\n")
 
         # Defining the returns expression 
         returns = 0
@@ -256,6 +258,7 @@ class SinglePeriod:
                                    label=f'indicator_constraint_lte_{s}')
 
         if max_risk: 
+            print('adding max risk')
             # Adding maximum risk constraint 
             cqm.add_constraint(risk <= max_risk, label='max_risk')
 
