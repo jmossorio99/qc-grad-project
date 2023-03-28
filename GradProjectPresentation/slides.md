@@ -404,7 +404,7 @@ portfolio_model = QModel('portfolio')
 # Creating the model
 <div>
 
-```python {5-6|all}
+```python {5-6}
 from qplex.library.qmodel import QModel
 
 portfolio_model = QModel('portfolio')
@@ -475,14 +475,26 @@ portfolio_model.add_constraint(risk <= max_risk)
 portfolio_model.set_objective('max', returns)
 ```
 
-<div v-click>
+---
 
-  ```python {monaco}
-  portfolio_model.solve('quantum', backend='d-wave')
-  ```
-</div>
+# Adding constraints and objective to model
+
+```python
+portfolio_model.add_constraint(cost <= budget)
+portfolio_model.add_constraint(risk <= max_risk)
+portfolio_model.set_objective('max', returns)
+```
+
+```python {monaco}
+portfolio_model.solve('quantum', backend='d-wave')
+```
 
 ---
 layout: statement
 ---
 # Demo
+
+---
+layout: statement
+---
+# Thank you!
