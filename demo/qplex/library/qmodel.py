@@ -16,6 +16,8 @@ class QModel(Model):
             'variables': list(map(lambda var: {
                 'name': var.name,
                 'type': var.vartype.cplex_typecode,
+                'lower_bound': var.lb,
+                'upper_bound': var.ub
             }, list(self.iter_variables()))),
             'constraints': list(map(lambda constraint: constraint, list(self.iter_constraints()))),
             'objective_func': self.get_objective_expr(),

@@ -1,53 +1,38 @@
-QuadraticModel({'AAPL': 0.0, 'MSFT': 0.0, 'AAL': 0.0, 'WMT': 0.0},
-{('AAPL', 'AAPL'): 0.4601146175591057,
-('MSFT', 'AAPL'): 0.7232462872417705,
-('MSFT', 'MSFT'): 1.189502849283338,
-('AAL', 'AAPL'): -0.2722358785456685,
-('AAL', 'MSFT'): -0.108596500549601,
-('AAL', 'AAL'): 0.21377677527612254,
-('WMT', 'AAPL'): 0.050104369565921264,
-('WMT', 'MSFT'): 1.2440042277345857,
-('WMT', 'AAL'): 0.7107312261877599,
-('WMT', 'WMT'): 4.2450265675686945},
-0.0,
-{'AAPL': 'INTEGER', 'MSFT': 'INTEGER', 'AAL': 'INTEGER', 'WMT': 'INTEGER'},
-dtype='float64')
-
-b=1000
-r=500
-objective: 8.791
-  AAPL=27
-  WMT=6
-
-b=1000
-r=None
-objective: 18.667
-  AAPL=85
-
-with demo dataset
-
-b=1000
-risk 1373.85
-objective: 22.348
-  AAL=1
+CPLEX
+objective: 53.268
   AKAM=1
   AMD=8
-  ATVI=1
-  BBY=1
-  BSX=1
-  CDNS=1
-  CHK=2
-  ETFC=2
-  GLW=1
-  GPN=1
-  HBI=1
-  HRL=1
-  IPG=1
-  KR=1
-  MGM=1
-  MU=1
-  PBCT=1
-  PGR=1
-  RF=1
-  UDR=1
-  XEL=1
+  AWK=4
+  BBY=2
+  CBOE=3
+  CI=2
+  CTAS=1
+  DRI=2
+  EQIX=1
+  EXPE=1
+  EXR=1
+  FB=1
+
+objective: 50.252
+  AKAM=1
+  AMD=4
+  APH=1
+  ATVI=2
+  AWK=4
+  BAC=1
+  BBY=3
+  CBOE=1
+  CI=1
+  COG=1
+  CTAS=1
+  DLR=2
+  DRI=2
+  ETFC=1
+  EW=1
+  EXPE=1
+  EXR=1
+  FB=1
+  FITB=1
+  FLIR=1
+
+

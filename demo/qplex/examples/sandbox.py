@@ -1,6 +1,4 @@
-import os
-print(os.getcwd())
-from qplex.library import QModel
+from qplex.library.qmodel import QModel
 
 
 def main():

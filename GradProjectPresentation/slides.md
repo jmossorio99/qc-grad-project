@@ -28,10 +28,9 @@ Finding the best distribution of assets to maximize or minimize a desired metric
 <br>
 
 <div v-click="1">
-  Examples:
+  For example:
   <ul>
     <li>Maximizing the return while limiting the risk</li>
-    <li>Minimizing the risk while maintaining a minimum return</li>
   </ul>
 </div>
 
@@ -84,7 +83,7 @@ Finding the best distribution of assets to maximize or minimize a desired metric
   }
 </style>
 
----
+<!-- ---
 
 # Why take a hybrid approach?
 
@@ -95,13 +94,13 @@ Finding the best distribution of assets to maximize or minimize a desired metric
     <li v-click="3">Long runtimes in classical methods</li>
     <li v-click="4">Using the best of both worlds</li>
   </ul>
-</div>
+</div> -->
 
 <!-- <div class="page-num">
   <SlideCurrentNo /> / <SlidesTotal />
 </div> -->
 
-<style>
+<!-- <style>
   li {
     font-size: 23px;
   }
@@ -110,7 +109,7 @@ Finding the best distribution of assets to maximize or minimize a desired metric
     bottom: 12px;
     left: 47.7%;
   }
-</style>
+</style> -->
 
 ---
 
@@ -392,7 +391,7 @@ layout: section
 
 <div>
 
-```python 
+```python {all|1|3}
 from qplex.library.qmodel import QModel
 
 portfolio_model = QModel('portfolio')
@@ -405,7 +404,7 @@ portfolio_model = QModel('portfolio')
 # Creating the model
 <div>
 
-```python 
+```python {5-6|all}
 from qplex.library.qmodel import QModel
 
 portfolio_model = QModel('portfolio')
@@ -448,7 +447,7 @@ for i, s1 in enumerate(stocks):
 
 <div v-click>
 
-## Computing the returns (the objective function)
+## Computing the returns
 
 ```python
 returns = 0
@@ -465,6 +464,23 @@ for index, stock in enumerate(stocks):
     font-size: 13px;
   }
 </style>
+
+---
+
+# Adding constraints and objective to model
+
+```python
+portfolio_model.add_constraint(cost <= budget)
+portfolio_model.add_constraint(risk <= max_risk)
+portfolio_model.set_objective('max', returns)
+```
+
+<div v-click>
+
+  ```python {monaco}
+  portfolio_model.solve('quantum', backend='d-wave')
+  ```
+</div>
 
 ---
 layout: statement

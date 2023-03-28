@@ -30,7 +30,7 @@ def build_demo_df():
 
 
 def set_columns(data, df, cols):
-    cols = cols[:101]
+    cols = cols[:201]
     refactored_df = pd.concat([df, pd.DataFrame(columns=cols)])
     for col in cols:
         col_to_add = data[data['Name'] == col]['open'].tolist()
@@ -64,18 +64,22 @@ max_num_shares, price, avg_monthly_returns, covariance_matrix, stocks = get_data
 
 # Define n -> number of variables
 n = len(stocks)
+
 # Create model
 print("Creating QModel")
 portfolio_model = QModel('portfolio')
+
 # Define variable list
 print("Adding variables...", end="")
 x = portfolio_model.integer_var_list(n, name=lambda index: stocks[index], ub=max_num_shares, lb=0)
+# x = portfolio_model.integer_var_list(n, name=lambda index: stocks[index])
 print(" done")
+
 # constraint: cost <= budget
 print("Computing cost constraint...", end="")
-print(stocks)
 cost = sum(price[s] * x[index] for index, s in enumerate(stocks))
 print(" done")
+
 # constraint: risk <= max_risk
 print("Computing risk constraint...", end="")
 risk = 0
@@ -84,12 +88,14 @@ for i, s1 in enumerate(stocks):
         coefficient = covariance_matrix[s1][s2] * price[s1] * price[s2]
         risk = risk + coefficient * x[i] * x[j]
 print(" done")
+
 # Defining Obj: returns
 print("Computing return...", end="")
 returns = 0
 for index, stock in enumerate(stocks):
     returns = returns + avg_monthly_returns[stock] * x[index] * price[stock]
 print(" done")
+
 # Add constraints and Obj to model
 # print(risk)
 print("Adding constraints...", end="")
@@ -97,12 +103,12 @@ portfolio_model.add_constraint(cost <= budget)
 portfolio_model.add_constraint(risk <= max_risk)
 portfolio_model.set_objective('max', returns)
 print(" done")
-'''
+
+
 print("Solving...", end="")
 portfolio_model.solve('quantum', backend='d-wave')
 print(" done")
-# print(portfolio_model.objective_value)
 print("Solution:")
 portfolio_model.print_solution()
-'''
+
 
