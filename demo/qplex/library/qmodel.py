@@ -42,13 +42,3 @@ class QModel(Model):
                                        name=self.name)
         Model._set_solution(self, new_solution=solve_solution)
 
-    # def get_status(self):
-    #     if self.job_id is None:
-    #         raise ValueError("Attribute job_id is None")
-    #     response = get_status_request(job_id=self.job_id)
-    #     if response['status'] == 'finished':
-    #         pass
-    #         # Call API to get solution
-    #         # self.set_solution()
-    #     return
-
